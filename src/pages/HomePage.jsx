@@ -1,10 +1,18 @@
 import React from "react";
-import Logo from "../assets/images/lines_carre.png";
+
+import Navbar from "../components/Navbar";
+import styled from "styled-components";
+
+const HomeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 export default function HomePage() {
   return (
-    <div>
-      <img src={Logo} alt="IMDB Logo" />
-    </div>
+    <HomeContainer>
+      <Navbar />
+      {/* Autres contenus de la page */}
+    </HomeContainer>
   );
 }
