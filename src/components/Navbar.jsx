@@ -27,6 +27,22 @@ const NavbarMenu = styled.ul`
   list-style: none;
 `;
 
+const NavbarItem = styled.li`
+  /* Ajoutez des styles à vos éléments de liste ici */
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+`;
+
+const NavbarLink = styled.a`
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    color: #ffcc00;
+  }
+`;
+
 const Navbar = () => {
   return (
     <StyledNav>
@@ -34,9 +50,9 @@ const Navbar = () => {
         <LogoImage src={Logo} alt="lines-logo" />
       </NavbarLogo>
       <NavbarMenu>
-        <li>Home</li>
-        <li>Watchlist</li>
-        <li>Login</li>
+        <NavbarItem>
+          <NavbarLink href="/">Home</NavbarLink>
+        </NavbarItem>
       </NavbarMenu>
     </StyledNav>
   );
