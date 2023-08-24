@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+
 import MovieList from "../components/MovieList";
+import axios from "axios";
+//const VITE_REACT_APP_TMDB_API_KEY = "f714e336c263d8b94f45e1aa89d6e109";
 
-function App() {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    //Appel API IMDB & mise à jour du state 'movies'
-    axios.get("https://www.omdbapi.com/?i=tt3896198&apikey=cbfe089e");
-    //https://www.themoviedb.org/
-  });
-}
+export const getPopularMovies = async () => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${
+        import.meta.env.VITE_REACT_APP_TMDB_API_KEY
+      }`
+   );
+   return response.data.results;
+  } catch (error) {
+    throw error;
+  }
+};
