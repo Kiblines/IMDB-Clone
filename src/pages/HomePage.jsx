@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
+import MovieList from "../components/MovieList";
 
 const HomeContainer = styled.div`
   display: flex;
@@ -12,12 +13,14 @@ const NavbarWrapper = styled.div`
   width: 100%; /* Prend la largeur complète */
   z-index: 1000; /* Assurez-vous que la barre de navigation est au-dessus des autres éléments */
 `;
+
 export default function HomePage() {
   return (
     <HomeContainer>
       <NavbarWrapper>
         <Navbar></Navbar>
       </NavbarWrapper>
+      <MovieList />
     </HomeContainer>
   );
 }
