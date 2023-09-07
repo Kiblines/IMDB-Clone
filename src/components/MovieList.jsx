@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components"; // Importe le module styled-components
 import { getPopularMovies } from "../api/Imdb";
+import { Link } from "react-router-dom";
 
 // Crée des composants Styled Components
 const MovieItem = styled.div`
@@ -49,10 +50,14 @@ const MovieList = () => {
         <MovieItem key={movie.id}>
           {movie.poster_path && (
             <Poster>
-              <img
-                src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                alt={movie.title}
-              />
+              <Link to={`/movie/${movie.id}`}>
+                {" "}
+                {/* Lien vers la page de détails */}
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  alt={movie.title}
+                />
+              </Link>
             </Poster>
           )}
           <MovieDetails>
