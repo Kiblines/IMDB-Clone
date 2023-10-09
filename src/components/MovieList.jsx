@@ -24,13 +24,18 @@ const ReleaseDate = styled.p`
   font-weight: bold;
 `;
 
-const Overview = styled.p``;
+const Overview = styled.p`
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+`;
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
+      setLoading(true);
       try {
         const moviesData = await getPopularMovies();
         setMovies(moviesData);
@@ -64,6 +69,8 @@ const MovieList = () => {
             <MovieTitle>{movie.title}</MovieTitle>
             <ReleaseDate>Release Date: {movie.release_date}</ReleaseDate>
             <Overview>{movie.overview}</Overview>
+            <Overview>{movie.overview}</Overview>
+            <Overview>{movie.title}</Overview>
           </MovieDetails>
         </MovieItem>
       ))}

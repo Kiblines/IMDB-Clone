@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getPopularMovies } from "../api/Imdb";
+import Movielist from "../components/MovieList";
 
 const Container = styled.div`
   display: flex;
@@ -34,23 +35,33 @@ const Overview = styled.p``;
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
+        setLoading(true);
         const movieData = await getPopularMovies(movieId);
         setMovie(movieData);
+        setMovie(false);
       } catch (error) {
         console.error("Error fetching movie details:", error);
         setMovie(null);
+        setLoading(false);
       }
     };
 
     fetchMovieDetails();
   }, [movieId]);
+  console.log(movieId);
+  console.log("Movie ID:", movieId);
 
   if (!movie) {
     return <Container>Loading...</Container>;
+  }
+  if (error) {
+    return <Container>{error}</Container>;
   }
 
   return (
@@ -67,8 +78,8 @@ const MovieDetailsPage = () => {
         <MovieDetails>
           <MovieTitle>{movie.title}</MovieTitle>
           <ReleaseDate>Release Date: {movie.release_date}</ReleaseDate>
+          <img src="https://picsum.photos/id/237/536/354" />
           <Overview>{movie.overview}</Overview>
-          {/* Ajouter d'autres détails du film ici */}
         </MovieDetails>
       </MovieDetailsWrapper>
     </Container>
