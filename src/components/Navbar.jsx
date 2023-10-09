@@ -2,6 +2,7 @@ import React from "react";
 import SearchIcon from "../assets/images/loupe-icon.png";
 import Logo from "../assets/images/lines_carre.png";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledNav = styled.nav`
   display: flex;
@@ -35,7 +36,7 @@ const NavbarItem = styled.li`
   text-transform: uppercase;
 `;
 
-const NavbarLink = styled.a`
+const NavbarLink = styled(Link)`
   text-decoration: none;
   color: white;
 
@@ -56,13 +57,13 @@ const Navbar = () => {
       </NavbarLogo>
       <NavbarMenu>
         <NavbarItem>
-          <NavbarLink href="/">Home</NavbarLink>
+          <NavbarLink to="/">Home</NavbarLink>
         </NavbarItem>
         <NavbarItem>
-          <NavbarLink href="/">Watchlist</NavbarLink>
+          <NavbarLink to="/movie/*">Watchlist</NavbarLink>
         </NavbarItem>
         <NavbarItem>
-          <NavbarLink href="/">Login</NavbarLink>
+          <NavbarLink to="/movie">Login</NavbarLink>
         </NavbarItem>
       </NavbarMenu>
     </StyledNav>

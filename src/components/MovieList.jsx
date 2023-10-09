@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components"; // Importe le module styled-components
 import { getPopularMovies } from "../api/Imdb";
+import { Link } from "react-router-dom";
 
 // Crée des composants Styled Components
 const MovieItem = styled.div`
@@ -23,13 +24,18 @@ const ReleaseDate = styled.p`
   font-weight: bold;
 `;
 
-const Overview = styled.p``;
+const Overview = styled.p`
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+`;
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMovies = async () => {
+      setLoading(true);
       try {
         const moviesData = await getPopularMovies();
         setMovies(moviesData);
@@ -49,16 +55,22 @@ const MovieList = () => {
         <MovieItem key={movie.id}>
           {movie.poster_path && (
             <Poster>
-              <img
-                src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                alt={movie.title}
-              />
+              <Link to={`/movie/${movie.id}`}>
+                {" "}
+                {/* Lien vers la page de détails */}
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  alt={movie.title}
+                />
+              </Link>
             </Poster>
           )}
           <MovieDetails>
             <MovieTitle>{movie.title}</MovieTitle>
             <ReleaseDate>Release Date: {movie.release_date}</ReleaseDate>
             <Overview>{movie.overview}</Overview>
+            <Overview>{movie.overview}</Overview>
+            <Overview>{movie.title}</Overview>
           </MovieDetails>
         </MovieItem>
       ))}

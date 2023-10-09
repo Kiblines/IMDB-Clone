@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import MovieList from "../components/MovieList";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const HomeContainer = styled.div`
   display: flex;
