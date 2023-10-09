@@ -35,7 +35,6 @@ const MovieList = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      setLoading(true);
       try {
         const moviesData = await getPopularMovies();
         setMovies(moviesData);

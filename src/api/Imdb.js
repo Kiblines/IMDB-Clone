@@ -28,4 +28,3 @@ export const getPopularMovies = async (movieId = null) => {
     throw error;
   }
 };
-console.log(response.data);
