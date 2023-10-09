@@ -47,7 +47,7 @@ const MovieDetailsPage = () => {
         setMovie(false);
       } catch (error) {
         console.error("Error fetching movie details:", error);
-        setMovie(null);
+        setError("Une erreur s'est produite lors du chargement du film.");
         setLoading(false);
       }
     };
