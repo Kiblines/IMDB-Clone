@@ -1,6 +1,7 @@
-🎥 IMDB Clone
-<img src="12c05375-aea6-4a99-878f-8ab7b59b5707.png" alt="IMDB-Logo-Lines" width="100" height="100"/>
+<img src="12c05375-aea6-4a99-878f-8ab7b59b5707.png" alt="IMDB-Logo-Lines" width="300" height="300"/>
 
+
+🎥 IMDB Clone
 
 Welcome to IMDB Clone, an immersive web application that brings the vast world of cinema right to your fingertips. Designed for movie buffs and casual viewers alike, this platform offers an engaging way to discover and delve into a plethora of popular films. 🍿
 
