@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components"; // Importe le module styled-components
 import { getPopularMovies } from "../api/Imdb";
-import { Link } from "react-router-dom";
+import MovieModal from "./MovieModal";
 
-// Crée des composants Styled Components
 const MovieItem = styled.div`
   display: flex;
   margin-bottom: 20px;
@@ -31,6 +30,8 @@ const Overview = styled.p`
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -46,6 +47,16 @@ const MovieList = () => {
     fetchMovies();
   }, []);
 
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    selectedMovie(null);
+  };
+
   return (
     <div>
       <h1>Popular Movies</h1>
@@ -56,18 +67,23 @@ const MovieList = () => {
               <img
                 src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
                 alt={movie.title}
+                onClick={() => openModal(movie)}
               />
             </Poster>
           )}
           <MovieDetails>
-            <MovieTitle>{movie.title}</MovieTitle>
+            <MovieTitle onClick={() => openModal(movie)}>
+              {movie.title}
+            </MovieTitle>
             <ReleaseDate>Release Date: {movie.release_date}</ReleaseDate>
             <Overview>{movie.overview}</Overview>
           </MovieDetails>
         </MovieItem>
       ))}
+      {isModalOpen && (
+        <MovieModal movieDetails={selectedMovie} onCloseModal={closeModal} />
+      )}
     </div>
   );
 };
-
 export default MovieList;
