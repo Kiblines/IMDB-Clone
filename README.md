@@ -1,6 +1,6 @@
 
 
-<div align="center" padding="10px">
+<div align="center" style="padding: 20px;">
 🎥 IMDB Clone 
 <br/>
   <img src="12c05375-aea6-4a99-878f-8ab7b59b5707.png" alt="IMDB-Logo-Lines" width="300" height="300" />
