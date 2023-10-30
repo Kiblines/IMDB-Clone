@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
+import { getReleaseDates } from "../api/Imdb";
 
 const Backdrop = styled.div`
   position: fixed;
@@ -7,16 +9,22 @@ const Backdrop = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: blue;
+  background-color: #6e6868;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const ModalBox = styled.div`
-  background-color: grey;
+  background-color: #000000;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
   padding: 20px;
-  border-radius: 20px;
+  margin: 8vh;
+  border-radius: 10px;
+  font-size: 20px;
 `;
 
 const CloseModalButton = styled.button`
@@ -28,15 +36,27 @@ const CloseModalButton = styled.button`
 `;
 
 const MovieModal = ({ movieDetails, onCloseModal }) => {
+  const [releaseDates, setReleaseDates] = useState([]);
+
+  useEffect(() => {
+    const fetchReleaseDates = async () => {
+      if (movieDetails && movieDetails.id) {
+        try {
+          const releaseDatesData = await getReleaseDates(movieDetails.id);
+          setReleaseDates(releaseDatesData);
+        } catch (error) {
+          console.error(
+            "Erreur lors de la récupération des dates de sortie",
+            error
+          );
+        }
+      }
+    };
+
+    fetchReleaseDates();
+  }, [movieDetails]);
+
   if (!movieDetails) return null;
-  MovieModal.propTypes = {
-    movieDetails: PropTypes.shape({
-      title: PropTypes.string,
-      poster_path: PropTypes.string,
-      overview: PropTypes.string,
-    }),
-    onCloseModal: PropTypes.func,
-  };
 
   return (
     <Backdrop onClick={onCloseModal}>
@@ -48,6 +68,7 @@ const MovieModal = ({ movieDetails, onCloseModal }) => {
           alt={`Poster of ${movieDetails.title}`}
         />
         <p>{movieDetails.overview}</p>
+        <p>{movieDetails.vote_average}</p>
         <button>Like</button>
       </ModalBox>
     </Backdrop>

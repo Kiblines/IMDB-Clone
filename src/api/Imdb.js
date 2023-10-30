@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import axios from "axios";
 
 export const getPopularMovies = async (movieId = null) => {
@@ -23,4 +24,12 @@ export const getPopularMovies = async (movieId = null) => {
   } catch (error) {
     throw error;
   }
+};
+
+export const getReleaseDates = async (movieId) => {
+  const url = `https://api.themoviedb.org/3/movie/${movieId}/release_dates?api_key=${
+    import.meta.env.VITE_REACT_APP_TMDB_API_KEY
+  }`;
+  const response = await axios.get(url);
+  return response.data.results; // Renvoie les dates de sortie par pays
 };
