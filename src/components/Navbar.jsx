@@ -8,7 +8,6 @@ const StyledNav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
   background-color: #333;
   color: white;
   height: 14vh;
@@ -85,7 +84,6 @@ const SearchInput = styled.input`
   border: none;
   background-color: transp;
   color: white;
-  outline: none;
   width: 100%;
 
   font-size: 14px; /* Ajustez la taille de la police selon vos préférences */
