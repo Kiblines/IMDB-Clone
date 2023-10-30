@@ -1,4 +1,6 @@
 🎥 IMDB Clone
+![IMBD-logo-lines](url_du_logo)
+
 Welcome to IMDB Clone, an immersive web application that brings the vast world of cinema right to your fingertips. Designed for movie buffs and casual viewers alike, this platform offers an engaging way to discover and delve into a plethora of popular films. 🍿
 
 🌟 Features
