@@ -38,6 +38,12 @@ const CloseModalButton = styled.button`
 const MovieModal = ({ movieDetails, onCloseModal }) => {
   const [releaseDates, setReleaseDates] = useState([]);
 
+  const genresList = {
+    28: "Action",
+    12: "Aventure",
+    // autres genres...
+  };
+
   useEffect(() => {
     const fetchReleaseDates = async () => {
       if (movieDetails && movieDetails.id) {
@@ -55,8 +61,14 @@ const MovieModal = ({ movieDetails, onCloseModal }) => {
 
     fetchReleaseDates();
   }, [movieDetails]);
+  const getGenreNames = (genreIds) => {
+    return genreIds
+      .map((id) => genresList[id])
+      .filter((name) => name !== undefined);
+  };
 
   if (!movieDetails) return null;
+  const movieGenres = getGenreNames(movieDetails.genre_ids);
 
   return (
     <Backdrop onClick={onCloseModal}>
@@ -69,6 +81,19 @@ const MovieModal = ({ movieDetails, onCloseModal }) => {
         />
         <p>{movieDetails.overview}</p>
         <p>{movieDetails.vote_average}</p>
+        <p>Date de sortie : {movieDetails.release_date}</p>
+        <p>Langue originale : {movieDetails.original_language}</p>
+        <p>Titre original : {movieDetails.original_title}</p>
+        {/* Afficher les genres ici */}
+        {movieGenres.length > 0 && <p>Genres : {movieGenres.join(", ")}</p>}
+
+        {movieDetails.adult ? <p>+18</p> : <p>-18</p>}
+
+        {movieDetails.video ? (
+          <p>🎥 Vidéo disponible</p>
+        ) : (
+          <p>Pas de vidéo disponible</p>
+        )}
         <button>Like</button>
       </ModalBox>
     </Backdrop>
