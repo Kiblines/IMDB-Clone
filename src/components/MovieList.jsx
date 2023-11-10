@@ -12,20 +12,15 @@ const Poster = styled.div`
   margin-right: 20px;
 `;
 
-const MovieDetails = styled.div``;
+const Grid = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+`;
+const MovieWrapper = styled.div``;
 
 const MovieTitle = styled.h2`
   margin-bottom: 10px;
-`;
-
-const ReleaseDate = styled.p`
-  margin-bottom: 5px;
-  font-weight: bold;
-`;
-
-const Overview = styled.p`
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 `;
 
 const MovieList = () => {
@@ -58,32 +53,30 @@ const MovieList = () => {
   };
 
   return (
-    <div>
-      <h1>Popular Movies</h1>
-      {movies.map((movie) => (
-        <MovieItem key={movie.id}>
-          {movie.poster_path && (
-            <Poster>
-              <img
-                src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                alt={movie.title}
-                onClick={() => openModal(movie)}
-              />
-            </Poster>
-          )}
-          <MovieDetails>
+    <MovieWrapper>
+      <h1 style={{ marginTop: "15vh" }}>Popular Movies</h1>
+      <Grid>
+        {movies.map((movie) => (
+          <MovieItem key={movie.id}>
+            {movie.poster_path && (
+              <Poster>
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  alt={movie.title}
+                  onClick={() => openModal(movie)}
+                />
+              </Poster>
+            )}
             <MovieTitle onClick={() => openModal(movie)}>
               {movie.title}
             </MovieTitle>
-            <ReleaseDate>Release Date: {movie.release_date}</ReleaseDate>
-            <Overview>{movie.overview}</Overview>
-          </MovieDetails>
-        </MovieItem>
-      ))}
-      {isModalOpen && (
-        <MovieModal movieDetails={selectedMovie} onCloseModal={closeModal} />
-      )}
-    </div>
+          </MovieItem>
+        ))}
+        {isModalOpen && (
+          <MovieModal movieDetails={selectedMovie} onCloseModal={closeModal} />
+        )}
+      </Grid>
+    </MovieWrapper>
   );
 };
 export default MovieList;

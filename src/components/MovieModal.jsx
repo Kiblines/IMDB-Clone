@@ -14,7 +14,15 @@ const Backdrop = styled.div`
   justify-content: center;
   align-items: center;
 `;
+const ReleaseDate = styled.p`
+  margin-bottom: 5px;
+  font-weight: bold;
+`;
 
+const Overview = styled.p`
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+`;
 const ModalBox = styled.div`
   background-color: #000000;
   display: flex;
@@ -79,9 +87,9 @@ const MovieModal = ({ movieDetails, onCloseModal }) => {
           src={`https://image.tmdb.org/t/p/w300/${movieDetails.poster_path}`}
           alt={`Poster of ${movieDetails.title}`}
         />
-        <p>{movieDetails.overview}</p>
+        <Overview>{movieDetails.overview}</Overview>
         <p>{movieDetails.vote_average}</p>
-        <p>Date de sortie : {movieDetails.release_date}</p>
+        <ReleaseDate>Date de sortie : {movieDetails.release_date}</ReleaseDate>
         <p>Langue originale : {movieDetails.original_language}</p>
         <p>Titre original : {movieDetails.original_title}</p>
         {/* Afficher les genres ici */}
