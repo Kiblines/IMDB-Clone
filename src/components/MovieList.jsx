@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useState } from "react";
 import styled from "styled-components"; // Importe le module styled-components
-import { getPopularMovies } from "../api/Imdb";
 import MovieModal from "./MovieModal";
 
 const MovieItem = styled.div`
@@ -23,24 +23,9 @@ const MovieTitle = styled.h2`
   margin-bottom: 10px;
 `;
 
-const MovieList = () => {
-  const [movies, setMovies] = useState([]);
+const MovieList = (props) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const moviesData = await getPopularMovies();
-        setMovies(moviesData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setMovies([]);
-      }
-    };
-
-    fetchMovies();
-  }, []);
 
   const openModal = (movie) => {
     setSelectedMovie(movie);
@@ -56,7 +41,7 @@ const MovieList = () => {
     <MovieWrapper>
       <h1 style={{ marginTop: "15vh" }}>Popular Movies</h1>
       <Grid>
-        {movies.map((movie) => (
+        {props.movies.map((movie) => (
           <MovieItem key={movie.id}>
             {movie.poster_path && (
               <Poster>

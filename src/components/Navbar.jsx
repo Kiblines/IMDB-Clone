@@ -1,4 +1,3 @@
-import React from "react";
 import SearchIcon from "../assets/images/loupe-icon.png";
 import Logo from "../assets/images/lines_carre.png";
 import styled from "styled-components";
