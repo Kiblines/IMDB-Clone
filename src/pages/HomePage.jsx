@@ -25,9 +25,11 @@ export default function HomePage() {
     try {
       const searchData = await getSearchMovies(searchMovie);
       setSearchResults(searchData);
+      console.log(searchData);
     } catch (error) {
       console.error("Error fetching search movie :", error);
       setSearchResults([]);
+      console.log(searchData);
     }
   };
 

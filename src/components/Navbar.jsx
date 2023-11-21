@@ -45,11 +45,15 @@ const NavbarLink = styled(Link)`
 `;
 
 const Navbar = ({ onSearchSubmit, onSearchChange }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearchSubmit();
+  };
   return (
     <StyledNav>
       <NavbarLogo>
         <LogoImage src={Logo} alt="lines-logo" />
-        <SearchContainer>
+        <SearchForm onSubmit={handleSubmit}>
           <SearchInput
             type="text"
             placeholder="Search movie"
@@ -60,7 +64,7 @@ const Navbar = ({ onSearchSubmit, onSearchChange }) => {
             <Icon src={SearchIcon} alt="search-icon" />
             Search
           </SearchBtn>
-        </SearchContainer>
+        </SearchForm>
       </NavbarLogo>
       <NavbarMenu>
         <NavbarItem>
@@ -78,16 +82,6 @@ const Navbar = ({ onSearchSubmit, onSearchChange }) => {
 };
 
 export default Navbar;
-
-const SearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 9px;
-  border-radius: 20px;
-  padding: 4px 10px;
-  flex-grow: 1;
-`;
 
 const SearchInput = styled.input`
   border: none;
@@ -108,4 +102,14 @@ const SearchBtn = styled.button`
 const Icon = styled.img`
   width: 15px;
   margin: 4px;
+`;
+
+const SearchForm = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 9px;
+  border-radius: 20px;
+  padding: 4px 10px;
+  flex-grow: 1;
 `;
