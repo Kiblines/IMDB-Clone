@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import MovieList from "../components/MovieList";
 import { useEffect, useState } from "react";
-import { getPopularMovies } from "../api/Imdb";
+import { getPopularMovies, getSearchMovies } from "../api/Imdb";
 
 // ta homepage c'est le grand manitou qui gère tes données
 
@@ -18,6 +18,18 @@ const NavbarWrapper = styled.div`
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
+  const [searchMovie, setSearchMovie] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearchSubmit = async () => {
+    try {
+      const searchData = await getSearchMovies(searchMovie);
+      setSearchResults(searchData);
+    } catch (error) {
+      console.error("Error fetching search movie :", error);
+      setSearchResults([]);
+    }
+  };
 
   useEffect(() => {
     const fetchMovies = async () => {

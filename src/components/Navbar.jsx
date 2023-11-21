@@ -1,5 +1,5 @@
 import SearchIcon from "../assets/images/loupe-icon.png";
-import Logo from "../assets/images/lines_carre.png";
+import Logo from "../assets/images/navbar-logo.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
