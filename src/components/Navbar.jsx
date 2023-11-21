@@ -1,6 +1,6 @@
-import React from "react";
+/* eslint-disable react/prop-types */
 import SearchIcon from "../assets/images/loupe-icon.png";
-import Logo from "../assets/images/lines_carre.png";
+import Logo from "../assets/images/navbar-logo.png";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -18,9 +18,9 @@ const NavbarLogo = styled.div`
 `;
 
 const LogoImage = styled.img`
-  max-width: 10%; /* La largeur maximale de l'image est de 100% du conteneur */
-  height: auto; /* La hauteur est ajustée automatiquement pour conserver les proportions */
-  margin-bottom: 20px; /* Espacement en bas de l'image */
+  max-width: 10%;
+  height: auto;
+  margin-bottom: 20px;
 `;
 const NavbarMenu = styled.ul`
   display: flex;
@@ -29,7 +29,6 @@ const NavbarMenu = styled.ul`
 `;
 
 const NavbarItem = styled.li`
-  /* Ajoutez des styles à vos éléments de liste ici */
   font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
@@ -41,18 +40,31 @@ const NavbarLink = styled(Link)`
 
   &:hover {
     color: #ffcc00;
+    font-weight: 700;
   }
 `;
 
-const Navbar = () => {
+const Navbar = ({ onSearchSubmit, onSearchChange }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearchSubmit();
+  };
   return (
     <StyledNav>
       <NavbarLogo>
         <LogoImage src={Logo} alt="lines-logo" />
-        <SearchContainer>
-          <SearchInput type="text" placeholder="Search movie" />
-          <SearchIconImage src={SearchIcon} alt="search-icon" />
-        </SearchContainer>
+        <SearchForm onSubmit={handleSubmit}>
+          <SearchInput
+            type="text"
+            placeholder="Search movie"
+            onChange={onSearchChange}
+          />
+          <SearchBtn alt="search-button" onClick={onSearchSubmit}>
+            {" "}
+            <Icon src={SearchIcon} alt="search-icon" />
+            Search
+          </SearchBtn>
+        </SearchForm>
       </NavbarLogo>
       <NavbarMenu>
         <NavbarItem>
@@ -71,26 +83,33 @@ const Navbar = () => {
 
 export default Navbar;
 
-const SearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 9px;
-  border-radius: 20px;
-  padding: 4px 10px;
-  flex-grow: 1;
-`;
-
 const SearchInput = styled.input`
   border: none;
   background-color: transp;
   color: white;
-  width: 100%;
+  width: 50%;
+  height: 30%;
 
-  font-size: 14px; /* Ajustez la taille de la police selon vos préférences */
+  font-size: 14px;
 `;
 
-const SearchIconImage = styled.img`
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
+const SearchBtn = styled.button`
+  background-color: red;
+  display: flex;
+  margin: 6px;
+  align-items: center;
+`;
+const Icon = styled.img`
+  width: 15px;
+  margin: 4px;
+`;
+
+const SearchForm = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 9px;
+  border-radius: 20px;
+  padding: 4px 10px;
+  flex-grow: 1;
 `;
