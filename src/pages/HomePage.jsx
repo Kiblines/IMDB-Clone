@@ -1,6 +1,10 @@
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import MovieList from "../components/MovieList";
+import { useEffect, useState } from "react";
+import { getPopularMovies, getSearchMovies } from "../api/Imdb";
+
+// ta homepage c'est le grand manitou qui gère tes données
 
 const HomeContainer = styled.div`
   display: flex;
@@ -13,12 +17,44 @@ const NavbarWrapper = styled.div`
 `;
 
 export default function HomePage() {
+  const [movies, setMovies] = useState([]);
+  const [searchMovie, setSearchMovie] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearchSubmit = async () => {
+    try {
+      const searchData = await getSearchMovies(searchMovie);
+      setSearchResults(searchData);
+      console.log(searchData);
+    } catch (error) {
+      console.error("Error fetching search movie :", error);
+      setSearchResults([]);
+      console.log(searchData);
+    }
+  };
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const moviesData = await getPopularMovies();
+        setMovies(moviesData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setMovies([]);
+      }
+    };
+
+    fetchMovies();
+  }, []);
   return (
     <HomeContainer>
       <NavbarWrapper>
-        <Navbar></Navbar>
+        <Navbar
+          onSearchChange={(e) => setSearchMovie(e.target.value)}
+          onSearchSubmit={handleSearchSubmit}
+        ></Navbar>
       </NavbarWrapper>
-      <MovieList />
+      <MovieList movies={searchResults.length > 0 ? searchResults : movies} />
     </HomeContainer>
   );
 }

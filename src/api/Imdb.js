@@ -33,3 +33,16 @@ export const getReleaseDates = async (movieId) => {
   const response = await axios.get(url);
   return response.data.results; // Renvoie les dates de sortie par pays
 };
+
+export const getSearchMovies = async (movies) => {
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${
+    import.meta.env.VITE_REACT_APP_TMDB_API_KEY
+  }&query=${encodeURIComponent(movies)}`;
+  try {
+    const response = await axios.get(url);
+    return response.data.results; //Retourne les résultats de la recherche
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    throw error;
+  }
+};
