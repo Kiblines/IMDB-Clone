@@ -17,9 +17,9 @@ const NavbarLogo = styled.div`
 `;
 
 const LogoImage = styled.img`
-  max-width: 10%; /* La largeur maximale de l'image est de 100% du conteneur */
-  height: auto; /* La hauteur est ajustée automatiquement pour conserver les proportions */
-  margin-bottom: 20px; /* Espacement en bas de l'image */
+  max-width: 10%;
+  height: auto;
+  margin-bottom: 20px;
 `;
 const NavbarMenu = styled.ul`
   display: flex;
@@ -28,7 +28,6 @@ const NavbarMenu = styled.ul`
 `;
 
 const NavbarItem = styled.li`
-  /* Ajoutez des styles à vos éléments de liste ici */
   font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
@@ -40,6 +39,7 @@ const NavbarLink = styled(Link)`
 
   &:hover {
     color: #ffcc00;
+    font-weight: 700;
   }
 `;
 
@@ -52,14 +52,16 @@ const Navbar = (onSearchSubmit, onSearchChange) => {
           <SearchInput
             type="text"
             placeholder="Search movie"
-            alt="search-input"
             onChange={onSearchChange}
           />
-          <SearchIconImage
+          <SearchBtn
             src={SearchIcon}
             alt="search-icon"
-            onCLick={onSearchSubmit}
-          />
+            onClick={onSearchSubmit}
+          >
+            {" "}
+            Search
+          </SearchBtn>
         </SearchContainer>
       </NavbarLogo>
       <NavbarMenu>
@@ -82,6 +84,7 @@ export default Navbar;
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 9px;
   border-radius: 20px;
   padding: 4px 10px;
@@ -92,13 +95,12 @@ const SearchInput = styled.input`
   border: none;
   background-color: transp;
   color: white;
-  width: 100%;
+  width: 50%;
+  height: 30%;
 
-  font-size: 14px; /* Ajustez la taille de la police selon vos préférences */
+  font-size: 14px;
 `;
 
-const SearchIconImage = styled.img`
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
+const SearchBtn = styled.button`
+  background-color: red;
 `;

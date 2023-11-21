@@ -34,7 +34,7 @@ const MovieList = (props) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    selectedMovie(null);
+    setSelectedMovie(null);
   };
 
   return (
