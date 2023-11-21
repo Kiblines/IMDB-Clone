@@ -19,6 +19,18 @@ const Grid = styled.div`
 `;
 const MovieWrapper = styled.div``;
 
+const MovieResume = styled.p`
+  font-weight: 800;
+  font-size: 15px;
+  color: white;
+  background-color: red;
+`;
+
+const MovieContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const MovieTitle = styled.h2`
   margin-bottom: 10px;
 `;
@@ -52,9 +64,18 @@ const MovieList = (props) => {
                 />
               </Poster>
             )}
-            <MovieTitle onClick={() => openModal(movie)}>
-              {movie.title}
-            </MovieTitle>
+            <MovieContent>
+              <MovieTitle onClick={() => openModal(movie)}>
+                {movie.title}
+              </MovieTitle>
+              <MovieResume>{movie.overview}</MovieResume>
+              <MovieResume>{movie.vote_average}</MovieResume>
+
+              {movie.genres &&
+                movie.genres.map((genre) => (
+                  <span key={genre.id}>{genre.name}</span> // Affiche le nom de chaque genre
+                ))}
+            </MovieContent>
           </MovieItem>
         ))}
         {isModalOpen && (
