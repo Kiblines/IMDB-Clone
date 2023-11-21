@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import SearchIcon from "../assets/images/loupe-icon.png";
 import Logo from "../assets/images/navbar-logo.png";
 import styled from "styled-components";
@@ -43,7 +44,7 @@ const NavbarLink = styled(Link)`
   }
 `;
 
-const Navbar = (onSearchSubmit, onSearchChange) => {
+const Navbar = ({ onSearchSubmit, onSearchChange }) => {
   return (
     <StyledNav>
       <NavbarLogo>
@@ -54,12 +55,9 @@ const Navbar = (onSearchSubmit, onSearchChange) => {
             placeholder="Search movie"
             onChange={onSearchChange}
           />
-          <SearchBtn
-            src={SearchIcon}
-            alt="search-icon"
-            onClick={onSearchSubmit}
-          >
+          <SearchBtn alt="search-button" onClick={onSearchSubmit}>
             {" "}
+            <Icon src={SearchIcon} alt="search-icon" />
             Search
           </SearchBtn>
         </SearchContainer>
@@ -103,4 +101,11 @@ const SearchInput = styled.input`
 
 const SearchBtn = styled.button`
   background-color: red;
+  display: flex;
+  margin: 6px;
+  align-items: center;
+`;
+const Icon = styled.img`
+  width: 15px;
+  margin: 4px;
 `;
