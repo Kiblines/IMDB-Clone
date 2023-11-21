@@ -43,14 +43,23 @@ const NavbarLink = styled(Link)`
   }
 `;
 
-const Navbar = () => {
+const Navbar = (onSearchSubmit, onSearchChange) => {
   return (
     <StyledNav>
       <NavbarLogo>
         <LogoImage src={Logo} alt="lines-logo" />
         <SearchContainer>
-          <SearchInput type="text" placeholder="Search movie" />
-          <SearchIconImage src={SearchIcon} alt="search-icon" />
+          <SearchInput
+            type="text"
+            placeholder="Search movie"
+            alt="search-input"
+            onChange={onSearchChange}
+          />
+          <SearchIconImage
+            src={SearchIcon}
+            alt="search-icon"
+            onCLick={onSearchSubmit}
+          />
         </SearchContainer>
       </NavbarLogo>
       <NavbarMenu>

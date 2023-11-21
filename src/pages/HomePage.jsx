@@ -47,9 +47,12 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <NavbarWrapper>
-        <Navbar></Navbar>
+        <Navbar
+          onSearchChange={(e) => setSearchMovie(e.target.value)}
+          onSearchSubmit={handleSearchSubmit}
+        ></Navbar>
       </NavbarWrapper>
-      <MovieList movies={movies} />
+      <MovieList movies={searchResults.length > 0 ? searchResults : movies} />
     </HomeContainer>
   );
 }
