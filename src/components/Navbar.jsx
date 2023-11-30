@@ -94,7 +94,6 @@ const SearchInput = styled.input`
 `;
 
 const SearchBtn = styled.button`
-  background-color: red;
   display: flex;
   margin: 6px;
   align-items: center;
