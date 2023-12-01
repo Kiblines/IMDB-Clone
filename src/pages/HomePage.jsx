@@ -29,7 +29,6 @@ export default function HomePage() {
     } catch (error) {
       console.error("Error fetching search movie :", error);
       setSearchResults([]);
-      console.log(searchData);
     }
   };
 

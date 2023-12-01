@@ -11,6 +11,7 @@ const StyledNav = styled.nav`
   background-color: #333;
   color: white;
   height: 14vh;
+  padding-right: 3em;
 `;
 
 const NavbarLogo = styled.div`
@@ -20,7 +21,7 @@ const NavbarLogo = styled.div`
 const LogoImage = styled.img`
   max-width: 10%;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 `;
 const NavbarMenu = styled.ul`
   display: flex;
@@ -89,8 +90,8 @@ const SearchInput = styled.input`
   color: white;
   width: 50%;
   height: 30%;
-
   font-size: 14px;
+  padding-left: 14px;
 `;
 
 const SearchBtn = styled.button`
