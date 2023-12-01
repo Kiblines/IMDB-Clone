@@ -23,7 +23,6 @@ const MovieResume = styled.p`
   font-weight: 800;
   font-size: 15px;
   color: white;
-  background-color: red;
 `;
 
 const MovieContent = styled.div`
