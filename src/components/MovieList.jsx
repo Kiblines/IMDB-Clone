@@ -20,7 +20,7 @@ const Grid = styled.div`
 const MovieWrapper = styled.div``;
 
 const MovieResume = styled.p`
-  font-weight: 800;
+  font-weight: 400;
   font-size: 15px;
   color: white;
 `;
