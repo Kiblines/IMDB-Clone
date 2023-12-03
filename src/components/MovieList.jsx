@@ -36,13 +36,20 @@ const MovieTitle = styled.h2`
 const PageChanger = styled.button`
   border-radius: 8px;
   background-color: green;
+  &:hover {
+    background-color: red;
+    font-weight: 700px;
+    color: orange;
+  }
 `;
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
+  gap: 5px;
+  align-items: center;
 `;
 
-const MovieList = (props) => {
+const MovieList = ({ movies, currentPage, totalPages, setCurrentPage }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -60,7 +67,7 @@ const MovieList = (props) => {
     <MovieWrapper>
       <h1 style={{ marginTop: "15vh" }}>Popular Movies</h1>
       <Grid>
-        {props.movies.map((movie) => (
+        {(movies || []).map((movie) => (
           <MovieItem key={movie.id}>
             {movie.poster_path && (
               <Poster>
@@ -96,9 +103,29 @@ const MovieList = (props) => {
             First
           </PageChanger>
 
-          <PageChanger>Click</PageChanger>
-          <PageChanger>Click</PageChanger>
-          <PageChanger>Click</PageChanger>
+          <PageChanger
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Précédent
+          </PageChanger>
+          <span>
+            Page {currentPage} sur {totalPages}
+          </span>
+          <PageChanger
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+          >
+            Suivante
+          </PageChanger>
+          <PageChanger
+            onClick={() => setCurrentPage(totalPages)}
+            disabled={currentPage === totalPages}
+          >
+            Dernière
+          </PageChanger>
         </PageContainer>
       </Grid>
     </MovieWrapper>
