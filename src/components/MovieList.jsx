@@ -33,6 +33,14 @@ const MovieContent = styled.div`
 const MovieTitle = styled.h2`
   margin-bottom: 10px;
 `;
+const PageChanger = styled.button`
+  border-radius: 8px;
+  background-color: green;
+`;
+const PageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const MovieList = (props) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -80,6 +88,18 @@ const MovieList = (props) => {
         {isModalOpen && (
           <MovieModal movieDetails={selectedMovie} onCloseModal={closeModal} />
         )}
+        <PageContainer>
+          <PageChanger
+            onClick={() => setCurrentPage(1)}
+            disabled={currentPage === 1}
+          >
+            First
+          </PageChanger>
+
+          <PageChanger>Click</PageChanger>
+          <PageChanger>Click</PageChanger>
+          <PageChanger>Click</PageChanger>
+        </PageContainer>
       </Grid>
     </MovieWrapper>
   );

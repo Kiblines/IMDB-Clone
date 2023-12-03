@@ -20,6 +20,8 @@ export default function HomePage() {
   const [movies, setMovies] = useState([]);
   const [searchMovie, setSearchMovie] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   const handleSearchSubmit = async () => {
     try {
@@ -35,16 +37,17 @@ export default function HomePage() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const moviesData = await getPopularMovies();
-        setMovies(moviesData);
+        const data = await getPopularMovies(currentPage);
+        setMovies(data.results);
+        setTotalPages(data.total_pages);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setMovies([]);
       }
     };
 
     fetchMovies();
-  }, []);
+  }, [currentPage]);
+
   return (
     <HomeContainer>
       <NavbarWrapper>
@@ -53,7 +56,12 @@ export default function HomePage() {
           onSearchSubmit={handleSearchSubmit}
         ></Navbar>
       </NavbarWrapper>
-      <MovieList movies={searchResults.length > 0 ? searchResults : movies} />
+      <MovieList
+        movies={searchResults.length > 0 ? searchResults : movies}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        setCurrentPage={setCurrentPage}
+      />
     </HomeContainer>
   );
 }
