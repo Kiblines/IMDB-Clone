@@ -19,9 +19,10 @@ const NavbarLogo = styled.div`
 `;
 
 const LogoImage = styled.img`
-  max-width: 10%;
-  height: auto;
-  margin-bottom: 8px;
+  width: 8%;
+  height: 5%;
+  margin-bottom: 1%;
+  margin-left: 5%;
 `;
 const NavbarMenu = styled.ul`
   display: flex;
