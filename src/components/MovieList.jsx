@@ -39,7 +39,6 @@ const PageChanger = styled.button`
   &:hover {
     background-color: red;
     font-weight: 700px;
-    color: orange;
   }
 `;
 const PageContainer = styled.div`
@@ -47,6 +46,9 @@ const PageContainer = styled.div`
   justify-content: center;
   gap: 5px;
   align-items: center;
+`;
+const MovieListTitle = styled.h1`
+  margin-top: 17vh;
 `;
 
 const MovieList = ({ movies, currentPage, totalPages, setCurrentPage }) => {
@@ -65,7 +67,7 @@ const MovieList = ({ movies, currentPage, totalPages, setCurrentPage }) => {
 
   return (
     <MovieWrapper>
-      <h1 style={{ marginTop: "15vh" }}>Popular Movies</h1>
+      <MovieListTitle>Popular Movies</MovieListTitle>
       <Grid>
         {(movies || []).map((movie) => (
           <MovieItem key={movie.id}>
