@@ -20,7 +20,7 @@ const Grid = styled.div`
 const MovieWrapper = styled.div``;
 
 const MovieResume = styled.p`
-  font-weight: 800;
+  font-weight: 400;
   font-size: 15px;
   color: white;
 `;
@@ -33,8 +33,23 @@ const MovieContent = styled.div`
 const MovieTitle = styled.h2`
   margin-bottom: 10px;
 `;
+const PageChanger = styled.button`
+  border-radius: 8px;
+  background-color: green;
+  &:hover {
+    background-color: red;
+    font-weight: 700px;
+    color: orange;
+  }
+`;
+const PageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
+`;
 
-const MovieList = (props) => {
+const MovieList = ({ movies, currentPage, totalPages, setCurrentPage }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -52,7 +67,7 @@ const MovieList = (props) => {
     <MovieWrapper>
       <h1 style={{ marginTop: "15vh" }}>Popular Movies</h1>
       <Grid>
-        {props.movies.map((movie) => (
+        {(movies || []).map((movie) => (
           <MovieItem key={movie.id}>
             {movie.poster_path && (
               <Poster>
@@ -80,6 +95,32 @@ const MovieList = (props) => {
         {isModalOpen && (
           <MovieModal movieDetails={selectedMovie} onCloseModal={closeModal} />
         )}
+        <PageContainer>
+          <PageChanger
+            onClick={() => setCurrentPage(1)}
+            disabled={currentPage === 1}
+          >
+            First
+          </PageChanger>
+
+          <PageChanger
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Précédent
+          </PageChanger>
+          <span>
+            Page {currentPage} / {totalPages}
+          </span>
+          <PageChanger
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+          >
+            Suivante
+          </PageChanger>
+        </PageContainer>
       </Grid>
     </MovieWrapper>
   );
