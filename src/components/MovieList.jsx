@@ -110,7 +110,7 @@ const MovieList = ({ movies, currentPage, totalPages, setCurrentPage }) => {
             Précédent
           </PageChanger>
           <span>
-            Page {currentPage} sur {totalPages}
+            Page {currentPage} / {totalPages}
           </span>
           <PageChanger
             onClick={() =>
