@@ -120,12 +120,6 @@ const MovieList = ({ movies, currentPage, totalPages, setCurrentPage }) => {
           >
             Suivante
           </PageChanger>
-          <PageChanger
-            onClick={() => setCurrentPage(totalPages)}
-            disabled={currentPage === totalPages}
-          >
-            Dernière
-          </PageChanger>
         </PageContainer>
       </Grid>
     </MovieWrapper>
