@@ -34,6 +34,24 @@ export default function HomePage() {
     }
   };
 
+  const handleSortByRating = (order) => {
+    const sorted = [...movies].sort((a, b) =>
+      order === "desc"
+        ? b.vote_average - a.vote_average
+        : a.vote_average - b.vote_average
+    );
+    setMovies(sorted);
+  };
+
+  const handleSortByReleaseDate = (order) => {
+    const sorted = [...movies].sort((a, b) => {
+      const dateA = new Date(a.release_date);
+      const dateB = new Date(b.release_date);
+      return order === "desc" ? dateB - dateA : dateA - dateB;
+    });
+    setMovies(sorted);
+  };
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -61,6 +79,8 @@ export default function HomePage() {
         currentPage={currentPage}
         totalPages={totalPages}
         setCurrentPage={setCurrentPage}
+        handleSortByRating={handleSortByRating}
+        handleSortByReleaseDate={handleSortByReleaseDate}
       />
     </HomeContainer>
   );
