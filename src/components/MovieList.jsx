@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styled from "styled-components"; // Importe le module styled-components
 import MovieModal from "./MovieModal";
+import SearchIcon from "../assets/images/loupe-icon.png";
 
 const MovieItem = styled.div`
   display: flex;
@@ -51,6 +52,47 @@ const MovieListTitle = styled.h1`
   margin-top: 17vh;
 `;
 
+const SelectContainer = styled.div`
+  display: inline-block;
+  width: 200px;
+`;
+
+const StyledSelect = styled.select`
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  color: #333;
+  appearance: none;
+  background-image: url("${SearchIcon}");
+  background-size: 1em;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #888;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #555;
+  }
+`;
+
+const StyledOption = styled.option`
+  padding: 10px;
+  background: white;
+  color: #333;
+
+  &:hover,
+  &:focus {
+    background-color: #f3f3f3;
+  }
+`;
 const MovieList = ({
   movies,
   currentPage,
@@ -82,12 +124,14 @@ const MovieList = ({
   return (
     <MovieWrapper>
       <MovieListTitle>Popular Movies</MovieListTitle>
-      <select onChange={(e) => handleSortChange(e.target.value)}>
-        <option value="rating-desc">Highest Rating</option>
-        <option value="rating-asc">Lowest Rating</option>
-        <option value="date-desc">Newest</option>
-        <option value="date-asc">Oldest</option>
-      </select>
+      <SelectContainer>
+        <StyledSelect onChange={(e) => handleSortChange(e.target.value)}>
+          <StyledOption value="rating-desc">Highest Rating</StyledOption>
+          <StyledOption value="rating-asc">Lowest Rating</StyledOption>
+          <StyledOption value="date-desc">Newest</StyledOption>
+          <StyledOption value="date-asc">Oldest</StyledOption>
+        </StyledSelect>
+      </SelectContainer>
       <Grid>
         {(movies || []).map((movie) => (
           <MovieItem key={movie.id}>
@@ -129,7 +173,7 @@ const MovieList = ({
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
-            Précédent
+            Previous
           </PageChanger>
           <span>
             Page {currentPage} / {totalPages}
@@ -140,7 +184,7 @@ const MovieList = ({
             }
             disabled={currentPage === totalPages}
           >
-            Suivante
+            Next
           </PageChanger>
         </PageContainer>
       </Grid>
