@@ -51,7 +51,14 @@ const MovieListTitle = styled.h1`
   margin-top: 17vh;
 `;
 
-const MovieList = ({ movies, currentPage, totalPages, setCurrentPage }) => {
+const MovieList = ({
+  movies,
+  currentPage,
+  totalPages,
+  setCurrentPage,
+  handleSortByReleaseDate,
+  handleSortByRating,
+}) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -65,9 +72,22 @@ const MovieList = ({ movies, currentPage, totalPages, setCurrentPage }) => {
     setSelectedMovie(null);
   };
 
+  const handleSortChange = (value) => {
+    if (value.startsWith("rating")) {
+      handleSortByRating(value.split("-")[1]);
+    } else if (value.startsWith("date")) {
+      handleSortByReleaseDate(value.split("-")[1]);
+    }
+  };
   return (
     <MovieWrapper>
       <MovieListTitle>Popular Movies</MovieListTitle>
+      <select onChange={(e) => handleSortChange(e.target.value)}>
+        <option value="rating-desc">Highest Rating</option>
+        <option value="rating-asc">Lowest Rating</option>
+        <option value="date-desc">Newest</option>
+        <option value="date-asc">Oldest</option>
+      </select>
       <Grid>
         {(movies || []).map((movie) => (
           <MovieItem key={movie.id}>
