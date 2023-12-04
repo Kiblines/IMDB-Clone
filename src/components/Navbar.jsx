@@ -101,7 +101,7 @@ export default Navbar;
 const SearchInput = styled.input`
   border: none;
   background-color: transp;
-  color: white;
+  color: #000000;
   width: 50%;
   height: 30%;
   font-size: 14px;
