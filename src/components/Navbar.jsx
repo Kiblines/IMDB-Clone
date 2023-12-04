@@ -51,10 +51,23 @@ const Navbar = ({ onSearchSubmit, onSearchChange }) => {
     e.preventDefault();
     onSearchSubmit();
   };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <StyledNav>
       <NavbarLogo>
-        <LogoImage src={Logo} alt="lines-logo" />
+        <LogoImage
+          onClick={scrollToTop}
+          href="#top"
+          src={Logo}
+          alt="lines-logo"
+        />
         <SearchForm onSubmit={handleSubmit}>
           <SearchInput
             type="text"
@@ -88,7 +101,7 @@ export default Navbar;
 const SearchInput = styled.input`
   border: none;
   background-color: transp;
-  color: white;
+  color: #000000;
   width: 50%;
   height: 30%;
   font-size: 14px;
