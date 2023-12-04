@@ -51,10 +51,23 @@ const Navbar = ({ onSearchSubmit, onSearchChange }) => {
     e.preventDefault();
     onSearchSubmit();
   };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <StyledNav>
       <NavbarLogo>
-        <LogoImage src={Logo} alt="lines-logo" />
+        <LogoImage
+          onClick={scrollToTop}
+          href="#top"
+          src={Logo}
+          alt="lines-logo"
+        />
         <SearchForm onSubmit={handleSubmit}>
           <SearchInput
             type="text"
