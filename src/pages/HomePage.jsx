@@ -76,6 +76,7 @@ export default function HomePage() {
       </NavbarWrapper>
       <MovieList
         movies={searchResults.length > 0 ? searchResults : movies}
+        searchActive={searchResults.length > 0}
         currentPage={currentPage}
         totalPages={totalPages}
         setCurrentPage={setCurrentPage}

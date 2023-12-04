@@ -100,6 +100,7 @@ const MovieList = ({
   setCurrentPage,
   handleSortByReleaseDate,
   handleSortByRating,
+  searchActive,
 }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -124,14 +125,16 @@ const MovieList = ({
   return (
     <MovieWrapper>
       <MovieListTitle>Popular Movies</MovieListTitle>
-      <SelectContainer>
-        <StyledSelect onChange={(e) => handleSortChange(e.target.value)}>
-          <StyledOption value="rating-desc">Highest Rating</StyledOption>
-          <StyledOption value="rating-asc">Lowest Rating</StyledOption>
-          <StyledOption value="date-desc">Newest</StyledOption>
-          <StyledOption value="date-asc">Oldest</StyledOption>
-        </StyledSelect>
-      </SelectContainer>
+      {searchActive ? null : (
+        <SelectContainer>
+          <StyledSelect onChange={(e) => handleSortChange(e.target.value)}>
+            <StyledOption value="rating-desc">Highest Rating</StyledOption>
+            <StyledOption value="rating-asc">Lowest Rating</StyledOption>
+            <StyledOption value="date-desc">Newest</StyledOption>
+            <StyledOption value="date-asc">Oldest</StyledOption>
+          </StyledSelect>
+        </SelectContainer>
+      )}
       <Grid>
         {(movies || []).map((movie) => (
           <MovieItem key={movie.id}>
